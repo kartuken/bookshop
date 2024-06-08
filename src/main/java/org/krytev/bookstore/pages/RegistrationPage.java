@@ -28,6 +28,10 @@ public class RegistrationPage extends VerticalLayout {
     PasswordEncoder passwordEncoder;
 
     RegistrationPage(AuthService registrationService, PasswordEncoder passwordEncoder){
+        email.setLabel("Email");
+        password.setLabel("Password");
+        fio.setLabel("Full name");
+        address.setLabel("Address");
         this.registrationService = registrationService;
         add(email, password, fio, address, submitButton);
         submitButton.addClickListener(event -> {
