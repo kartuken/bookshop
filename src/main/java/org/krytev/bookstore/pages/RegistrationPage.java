@@ -1,5 +1,6 @@
 package org.krytev.bookstore.pages;
 
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.EmailField;
@@ -41,6 +42,7 @@ public class RegistrationPage extends VerticalLayout {
             user.setPassword(password.getValue());
             user.setAddress(address.getValue());
             registrationService.registration(user);
+            UI.getCurrent().navigate("/login");
         });
     }
 
