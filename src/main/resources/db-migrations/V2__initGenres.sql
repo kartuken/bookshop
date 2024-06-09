@@ -6,4 +6,6 @@ create table genres(
 
 insert into genres(name)
 values ('Fantastic'),
-       ('...');
+       ('Detective'),
+        ('Сomic'),
+        ('Thriller');

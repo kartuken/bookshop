@@ -22,6 +22,7 @@ public class BookEntity {
 
     private Double price;
 
+    private String image;
     @ManyToOne
     private GenreEntity genre;
 
