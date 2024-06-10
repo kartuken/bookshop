@@ -70,7 +70,7 @@ public class CreateBookPage extends VerticalLayout {
             bookService.save(book);
             try {
                 Files.move(Paths.get(savedFileData.getFile().getAbsoluteFile().toString()),
-                        Paths.get("src/main/resources/static/images" + "/" + uuid.toString()));
+                        Paths.get("src/main/resources/static/images" + "/" + uuid.toString() + ".png"));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
