@@ -19,7 +19,6 @@ public class AuthService {
 
     public void registration(UserEntity user){
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-
         RoleEntity userRole = roleRepository.findById(1L).get();
         user.setRoles(List.of(userRole));
         userRepository.save(user);

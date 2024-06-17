@@ -13,14 +13,13 @@ create table users(
     id bigserial primary key,
     email varchar(255) unique not null,
     password varchar(255) not null,
-    fio varchar(255),
+    first_name varchar(255) not null,
+    last_name varchar(255) not null,
     address varchar(255),
-    confirmation_link varchar(255),
-    is_confirmed boolean
 );
 
-insert into users(email, password)
-values ('admin@mail.ru', '$2a$10$oCy7SYTnK0rK0caWUcEb1ODJP7oVyx/rNpWjKgJCIGzylSMBW4Gai');
+insert into users(email, password, first_name, last_name, address)
+values ('admin@mail.ru', '$2a$10$oCy7SYTnK0rK0caWUcEb1ODJP7oVyx/rNpWjKgJCIGzylSMBW4Gai', 'admin', 'admin', 'admin');
 
 create table user_roles (
     user_id bigserial references users(id),

@@ -23,6 +23,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.UUID;
 
 @Route("createBook")
@@ -35,6 +37,7 @@ public class CreateBookPage extends VerticalLayout {
     private TextField author = new TextField();
     private IntegerField year = new IntegerField();
     private BigDecimalField price = new BigDecimalField();
+    private TextArea description = new TextArea();
     ComboBox<GenreEntity> genreComboBox = new ComboBox<>("Genre");
     private Button create = new Button();
     FileBuffer fileBuffer = new FileBuffer();
@@ -56,7 +59,8 @@ public class CreateBookPage extends VerticalLayout {
         year.setLabel("year");
         price.setLabel("price");
         create.setText("create");
-        add(title, author, year, price, genreComboBox, singleFileUpload, create);
+        description.setLabel("description");
+        add(title, author, year, description, price, genreComboBox, singleFileUpload, create);
         create.addClickListener(event -> {
             BookEntity book = new BookEntity();
             book.setTitle(title.getValue());
@@ -64,6 +68,8 @@ public class CreateBookPage extends VerticalLayout {
             book.setPrice(price.getValue().doubleValue());
             book.setYear(year.getValue());
             book.setGenre(genreComboBox.getValue());
+            book.setDescription(description.getValue());
+            book.setCreationTime(LocalDate.now());
             FileData savedFileData = fileBuffer.getFileData();
             UUID uuid = UUID.randomUUID();
             book.setImage(uuid.toString());

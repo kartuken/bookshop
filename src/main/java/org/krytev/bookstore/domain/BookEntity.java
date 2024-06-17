@@ -3,6 +3,7 @@ package org.krytev.bookstore.domain;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -24,13 +25,18 @@ public class BookEntity {
 
     private String image;
 
+    private LocalDate creationTime;
+
+    @Column(columnDefinition = "text")
+    private String description;
+
     @ManyToOne
     private GenreEntity genre;
 
     @OneToMany
     private List <CommentEntity> comments;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List <LikeEntity> likes;
 
 }

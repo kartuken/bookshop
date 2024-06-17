@@ -1,4 +1,4 @@
-package org.krytev.bookstore.security;
+package org.krytev.bookstore.configurations;
 
 import lombok.RequiredArgsConstructor;
 import org.krytev.bookstore.repositories.UserRepository;

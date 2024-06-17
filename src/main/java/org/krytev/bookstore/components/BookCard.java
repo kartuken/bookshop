@@ -30,7 +30,7 @@ public class BookCard extends VerticalLayout {
     private final BookEntity book;
     public BookCard(BookEntity book){
         this.book = book;
-        this.addClassName("card");
+        this.addClassName("bookcard-card");
         this.getElement().setProperty("display", "inline-block");
         this.setWidth("");
 
@@ -39,12 +39,12 @@ public class BookCard extends VerticalLayout {
 
     private Component getImageContainer(){
         Div result = new Div();
-        result.addClassName("image-container");
+        result.addClassName("bookcard-image-container");
 
-        StreamResource imageResource = new StreamResource("picture1.png",
-                () -> getClass().getResourceAsStream("/static/picture1.png"));
+        StreamResource imageResource = new StreamResource(book.getImage(),
+                () -> getClass().getResourceAsStream("/static/images/" + book.getImage() + ".png"));
         Component image = new Image(imageResource, "404\nNo image");
-        image.addClassName("image");
+        image.addClassName("bookcard-image");
 
         result.add(image);
         return result;
@@ -52,14 +52,14 @@ public class BookCard extends VerticalLayout {
 
     private Component getTitleContainer(){
         Div result = new Div();
-        result.addClassName("title");
+        result.addClassName("bookcard-title");
         result.getElement().setText(book.getTitle());
         return result;
     }
 
     private Component getAuthorContainer(){
         Div result = new Div();
-        result.addClassName("author");
+        result.addClassName("bookcard-author");
         result.getElement().setText(book.getAuthor());
         return result;
     }
@@ -68,26 +68,21 @@ public class BookCard extends VerticalLayout {
         Div result = new Div();
 
         Div likes = new Div();
-        likes.addClassName("likes");
+        likes.addClassName("bookcard-likes");
 
         Icon heartIcon = VaadinIcon.HEART.create();
         heartIcon.addClassName("heart");
         heartIcon.setSize("15px");
 
-        Component likeCount = new Span("130");
+        Component likeCount = new Span(String.valueOf(book.getLikes().size()));
         likes.add(heartIcon, likeCount);
 
-        Div views = new Div();
-        views.addClassName("views");
+        Div price = new Div();
+        price.addClassName("bookcard-price");
+        price.setText(book.getPrice().toString() + " ₽");
 
-        Icon eyeIcon = VaadinIcon.EYE.create();
-        eyeIcon.addClassName("eye");
-        eyeIcon.setSize("15px");
 
-        Component viewCount = new Span("130");
-        views.add(eyeIcon, viewCount);
-
-        result.add(likes, views);
+        result.add(likes, price);
         return result;
     }
 

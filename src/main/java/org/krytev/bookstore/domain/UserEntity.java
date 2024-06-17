@@ -22,11 +22,9 @@ public class UserEntity implements UserDetails {
 
     private String password;
 
-    private String fio;
+    private String firstName;
 
-    private String confirmationLink;
-
-    private Boolean isConfirmed;
+    private String lastName;
 
     private String address;
 

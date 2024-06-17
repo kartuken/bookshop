@@ -1,8 +1,10 @@
 package org.krytev.bookstore.services;
 
 import org.krytev.bookstore.domain.BookEntity;
+import org.krytev.bookstore.domain.GenreEntity;
 import org.krytev.bookstore.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -43,5 +45,17 @@ public class BookService{
 
     public List<BookEntity> findAll(){
       return bookRepository.findAll();
+    }
+
+    public List<BookEntity> findMostLiked(){
+       return bookRepository.findMostLiked(PageRequest.ofSize(15));
+    }
+
+    public List<BookEntity> findNewBooks(){
+        return bookRepository.findNewBooks(PageRequest.ofSize(15));
+    }
+
+    public List<BookEntity> findByGenre(GenreEntity genre){
+        return bookRepository.findByGenre(genre, PageRequest.ofSize(15));
     }
 }
