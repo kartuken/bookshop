@@ -6,10 +6,13 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import lombok.RequiredArgsConstructor;
 import org.krytev.bookstore.components.BookList;
+import org.krytev.bookstore.components.NavigationBar;
 import org.krytev.bookstore.domain.GenreEntity;
+import org.krytev.bookstore.domain.UserEntity;
 import org.krytev.bookstore.services.BookService;
 import org.krytev.bookstore.services.GenreService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 @Route("")
 @PageTitle("The Legendary Book Store")
@@ -24,6 +27,7 @@ public class MainPage extends VerticalLayout {
         this.genreService = genreService;
 
         add(
+                new NavigationBar(SecurityContextHolder.getContext().getAuthentication()),
                 new BookList("Most Liked", bookService.findMostLiked()),
                 new BookList("New books on website", bookService.findNewBooks())
         );

@@ -26,7 +26,7 @@ public class LoginPage extends VerticalLayout implements BeforeEnterObserver {
         setAlignItems(Alignment.CENTER);
 
         login.setAction("login");
-        login.addLoginListener(buttonClickEvent -> UI.getCurrent().navigate("/index"));
+        login.addLoginListener(buttonClickEvent -> UI.getCurrent().navigate(""));
         registration.addClickListener(buttonClickEvent -> UI.getCurrent().navigate("/registration"));
         add(new H1("Test Application"), login, registration);
 

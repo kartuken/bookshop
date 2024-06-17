@@ -1,3 +1,26 @@
 .navigationbar-title{
+    font-weight: bold;
+    font-size: 32px;
+    color: darkgreen;
+    font-style: italic;
+    font-family: Arial;
+    display: inline-block;
+}
 
+navigationbar-container{
+
+}
+
+navigationbar-topcontainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+navigationbar-botcontainer{
+
+}
+
+navigationbar-log-buttons-container{
+    display: inline-block;
 }

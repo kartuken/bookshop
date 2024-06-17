@@ -2,24 +2,62 @@ package org.krytev.bookstore.components;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Tag;
+import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import org.krytev.bookstore.domain.CommentEntity;
 import org.krytev.bookstore.domain.RoleEntity;
 import org.krytev.bookstore.domain.UserEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Tag("div")
-public class NavigationBar extends HorizontalLayout {
+@CssImport("./styles/navigation-bar.css")
+public class NavigationBar extends VerticalLayout {
 
-    NavigationBar(Authentication authentication){
+    List <GrantedAuthority> roles;
+
+    public NavigationBar(Authentication authentication){
         this.addClassName("navigationbar-container");
 
-        add();
+        roles = (List<GrantedAuthority>) authentication.getAuthorities();
+
+        Div topContainer = new Div();
+        topContainer.setWidth("");
+        topContainer.addClassName("navigationbar-topcontainer");
+        topContainer.add(
+                getTitle(),
+
+                // For debugging. Delete after
+//                new Text(authentication.getPrincipal().toString()),
+//                new Text(roles.stream().map(GrantedAuthority::getAuthority).collect(Collectors.joining(" "))),
+//                new Text(String.valueOf(roles.contains(new SimpleGrantedAuthority("ROLE_ANONYMOUS")))),
+
+                roles.contains(new SimpleGrantedAuthority("ROLE_ANONYMOUS"))
+                        ? getLogButtons()
+                        : getLogedIcons((UserEntity) authentication.getPrincipal())
+        );
+
+        HorizontalLayout botContainer = new HorizontalLayout();
+        botContainer.addClassName("navigationbar-botcontainer");
+        botContainer.add(
+                getNavigationComponent("Main", ""),
+                getNavigationComponent("Catalog", ""),
+                getNavigationComponent("Filials", "")
+        );
+
+        add(
+                topContainer,
+                botContainer
+        );
 
     }
 
@@ -27,6 +65,7 @@ public class NavigationBar extends HorizontalLayout {
         Div result = new Div();
         result.addClassName("navigationbar-title");
         result.setText("The Legendary Book Store");
+        result.setWidth("");
         return result;
     }
 
@@ -42,6 +81,7 @@ public class NavigationBar extends HorizontalLayout {
     private Component getLogButtons(){
         Div result = new Div();
         result.addClassName("navigationbar-log-buttons-container");
+        result.setWidth("");
 
         Button signIn = new Button("Sign In");
         signIn.addClassName("navigationbar-sign-in-button");

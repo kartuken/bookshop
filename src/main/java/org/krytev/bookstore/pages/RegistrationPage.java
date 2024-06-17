@@ -20,7 +20,8 @@ public class RegistrationPage extends VerticalLayout {
 
     private EmailField email = new EmailField();
     private PasswordField password = new PasswordField();
-    private TextField fio = new TextField();
+    private TextField firstName = new TextField();
+    private TextField lastName= new TextField();
     private TextField address = new TextField();
 
     private Button submitButton = new Button("Registration!");
@@ -31,14 +32,16 @@ public class RegistrationPage extends VerticalLayout {
     RegistrationPage(AuthService registrationService, PasswordEncoder passwordEncoder){
         email.setLabel("Email");
         password.setLabel("Password");
-        fio.setLabel("Full name");
+        firstName.setLabel("Firstname");
+        lastName.setLabel("Lastname");
         address.setLabel("Address");
         this.registrationService = registrationService;
-        add(email, password, fio, address, submitButton);
+        add(email, password, firstName, lastName, address, submitButton);
         submitButton.addClickListener(event -> {
             UserEntity user = new UserEntity();
             user.setEmail(email.getValue());
-            user.setFio(fio.getValue());
+            user.setFirstName(firstName.getValue());
+            user.setLastName(lastName.getValue());
             user.setPassword(password.getValue());
             user.setAddress(address.getValue());
             registrationService.registration(user);
