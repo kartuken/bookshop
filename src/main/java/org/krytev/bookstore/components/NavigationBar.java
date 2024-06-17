@@ -31,7 +31,6 @@ public class NavigationBar extends VerticalLayout {
         roles = (List<GrantedAuthority>) authentication.getAuthorities();
 
         Div topContainer = new Div();
-        topContainer.setWidth("");
         topContainer.addClassName("navigationbar-topcontainer");
         topContainer.add(
                 getTitle(),

@@ -4,6 +4,12 @@ import { css, unsafeCSS, registerStyles } from '@vaadin/vaadin-themable-mixin';
 import $cssFromFile_0 from 'Frontend/styles/book-card.css?inline';
 
 injectGlobalCss($cssFromFile_0.toString(), 'CSSImport end', document);
+import $cssFromFile_1 from 'Frontend/styles/book-list.css?inline';
+
+injectGlobalCss($cssFromFile_1.toString(), 'CSSImport end', document);
+import $cssFromFile_2 from 'Frontend/styles/navigation-bar.css?inline';
+
+injectGlobalCss($cssFromFile_2.toString(), 'CSSImport end', document);
 import '@vaadin/common-frontend/ConnectionIndicator.js';
 import '@vaadin/polymer-legacy-adapter/style-modules.js';
 import '@vaadin/accordion/theme/lumo/vaadin-accordion.js';
