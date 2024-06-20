@@ -1,5 +1,6 @@
 package org.krytev.bookstore.repositories;
 
+import jakarta.persistence.OrderBy;
 import org.krytev.bookstore.domain.BookEntity;
 import org.krytev.bookstore.domain.GenreEntity;
 import org.springframework.data.domain.Pageable;
@@ -12,9 +13,10 @@ import java.util.List;
 public interface BookRepository extends CrudRepository<BookEntity, Long> {
     List<BookEntity> findAll();
 
-    @Query(value = "select book from BookEntity book left join book.likes likes group by book order by count(likes) desc")
+    @Query(value = "select book from BookEntity book JOIN book.likes likes")
+    @OrderBy("likes desc")
     List<BookEntity> findMostLiked(Pageable pageable);
-
+//select book from BookEntity book left join book.likes likes group by book order by count(likes) desc
     @Query(value = "select book from BookEntity book order by book.creationTime desc")
     List<BookEntity> findNewBooks(Pageable pageable);
 
