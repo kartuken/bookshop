@@ -58,7 +58,6 @@ public class NavigationBar extends VerticalLayout {
         if (roles.contains(new SimpleGrantedAuthority("ROLE_ADMIN"))){
             botContainer.add(
                     getNavigationComponent("Add Book", "create-book"),
-                    getNavigationComponent("Add Genre", "create-genre"),
                     getNavigationComponent("Add Filial", "create-filial"),
                     getNavigationComponent("Watch orders", "view-orders")
             );
