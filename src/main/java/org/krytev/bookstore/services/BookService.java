@@ -59,4 +59,14 @@ public class BookService{
     public List<BookEntity> findByGenre(GenreEntity genre){
         return bookRepository.findByGenre(genre, PageRequest.ofSize(15));
     }
+
+    public List<BookEntity> findByTitle(String title){
+       return bookRepository.findByTitleContainingIgnoreCase(title);
+    }
+
+    public List<BookEntity> findByTitleAndGenre(String title, GenreEntity genre){
+
+       //return bookRepository.findByTitleContainingIgnoreCase(title).stream().filter(book -> book.getGenre().equals(genre)).toList();
+        return bookRepository.findByTitleContainingIgnoreCaseAndGenreIs(title, genre);
+    }
 }

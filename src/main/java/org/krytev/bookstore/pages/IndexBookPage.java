@@ -13,6 +13,7 @@ import jakarta.annotation.security.RolesAllowed;
 import org.apache.catalina.webresources.FileResource;
 import org.krytev.bookstore.domain.BookEntity;
 import org.krytev.bookstore.services.BookService;
+import org.krytev.bookstore.services.GenreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -31,8 +32,12 @@ public class IndexBookPage extends VerticalLayout {
     private Grid<BookEntity> grid = new Grid<>(BookEntity.class);
     private Button createRedirectButton = new Button();
     @Autowired
-    public IndexBookPage(BookService bookService, SecurityContextHolder securityContextHolder) {
+    public IndexBookPage(BookService bookService, SecurityContextHolder securityContextHolder, GenreService genreService) {
         this.bookService = bookService;
+        System.out.println("testing start");
+        System.out.println(bookService.findByTitle("asd"));
+        System.out.println(bookService.findByTitleAndGenre("asd", genreService.findByName("Fantastic").get()));
+        System.out.println("testing end");
         add(grid);
         grid.setItems(bookService.findAll());
         grid.setColumns("title", "author", "year", "price");
@@ -45,7 +50,6 @@ public class IndexBookPage extends VerticalLayout {
         if(roles.contains(new SimpleGrantedAuthority("ROLE_ADMIN"))){
             add(createRedirectButton);
         }
-
     }
 
 }

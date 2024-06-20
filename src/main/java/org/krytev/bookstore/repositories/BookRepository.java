@@ -22,4 +22,8 @@ public interface BookRepository extends CrudRepository<BookEntity, Long> {
 
     @Query(value = "select book from BookEntity book where book.genre = :genre order by book.creationTime desc")
     List<BookEntity> findByGenre(@Param("genre") GenreEntity genre, Pageable pageable);
+
+    List<BookEntity> findByTitleContainingIgnoreCase(String title);
+
+    List<BookEntity> findByTitleContainingIgnoreCaseAndGenreIs(String title, GenreEntity genre);
 }
