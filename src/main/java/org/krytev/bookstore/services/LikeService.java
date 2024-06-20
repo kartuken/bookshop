@@ -10,6 +10,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class LikeService {
@@ -44,5 +46,9 @@ public class LikeService {
 
     public Integer getLikeCount(BookEntity book){
         return likeRepository.countByBook(book);
+    }
+
+    public List<BookEntity> getLikedBooks(Authentication authentication){
+        return likeRepository.findLikedBooks((UserEntity) authentication.getPrincipal());
     }
 }

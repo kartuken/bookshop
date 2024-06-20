@@ -5,24 +5,18 @@ import lombok.Data;
 
 import java.util.List;
 
-
 @Entity
 @Data
-@Table(name = "filials")
-public class FilialEntity {
+@Table(name = "cities")
+public class CityEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String address;
-
-    private String time;
-
-    @ManyToOne
-    private CityEntity city;
+    private String name;
 
     @OneToMany
-    private List <OrderEntity> orders;
+    private List<FilialEntity> filials;
 
 }
