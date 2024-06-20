@@ -5,6 +5,7 @@
     width: 130px;
     border: black solid 2px;
     margin: 10px;
+    flex-shrink: 0;
 }
 
 .bookcard-image{

@@ -12,7 +12,7 @@ import java.util.List;
 public interface BookRepository extends CrudRepository<BookEntity, Long> {
     List<BookEntity> findAll();
 
-    @Query(value = "select book from BookEntity book order by size(book.likes) desc")
+    @Query(value = "select book from BookEntity book left join book.likes likes group by book order by count(likes) desc")
     List<BookEntity> findMostLiked(Pageable pageable);
 
     @Query(value = "select book from BookEntity book order by book.creationTime desc")

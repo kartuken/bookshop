@@ -1,14 +1,14 @@
 .navigationbar-title{
     font-weight: bold;
     font-size: 32px;
-    color: darkgreen;
+    color: #2ea44f;
     font-style: italic;
     font-family: Arial;
     display: inline-block;
 }
 
 .navigationbar-container{
-    background-color: #f1dbf1;
+    background-color: #f6e6f6;
     margin: -15px 0px 0px -15px;
     padding: 15px 15px 15px 15px;
 }
@@ -24,5 +24,40 @@
 }
 
 .navigationbar-log-buttons-container{
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.navigationbar-sign-in-button{
+    background-color: #2ea44f;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    padding: 10px 16px 10px 16px;
+}
+
+.navigationbar-sign-up-button{
+    margin-left: 10px;
+    background-color: #ffffff;
+    color: #2ea44f;
+    border: 2px #2ea44f solid;
+    border-radius: 4px;
+    font-weight: bold;
+    padding: 10px 16px 10px 16px;
+}
+
+.navigationbar-navigate-button{
+    background-color: #2ea44f;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 16px 10px 16px;
+    font-weight: bold;
+}
+
+.navigationbar-navigate-button:hover{
+    text-decoration: underline;
 }

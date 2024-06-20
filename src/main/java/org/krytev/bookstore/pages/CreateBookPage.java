@@ -13,21 +13,24 @@ import com.vaadin.flow.component.upload.receivers.FileBuffer;
 import com.vaadin.flow.component.upload.receivers.FileData;
 import com.vaadin.flow.router.Route;
 import jakarta.annotation.security.RolesAllowed;
+import org.krytev.bookstore.components.NavigationBar;
 import org.krytev.bookstore.domain.BookEntity;
 import org.krytev.bookstore.domain.GenreEntity;
 import org.krytev.bookstore.domain.UserEntity;
 import org.krytev.bookstore.services.BookService;
 import org.krytev.bookstore.services.GenreService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.UUID;
 
-@Route("createBook")
+@Route("create-book")
 @RolesAllowed("ROLE_ADMIN")
 public class CreateBookPage extends VerticalLayout {
 
@@ -60,7 +63,8 @@ public class CreateBookPage extends VerticalLayout {
         price.setLabel("price");
         create.setText("create");
         description.setLabel("description");
-        add(title, author, year, description, price, genreComboBox, singleFileUpload, create);
+        add(new NavigationBar(SecurityContextHolder.getContext().getAuthentication()),
+                title, author, year, description, price, genreComboBox, singleFileUpload, create);
         create.addClickListener(event -> {
             BookEntity book = new BookEntity();
             book.setTitle(title.getValue());
@@ -69,7 +73,7 @@ public class CreateBookPage extends VerticalLayout {
             book.setYear(year.getValue());
             book.setGenre(genreComboBox.getValue());
             book.setDescription(description.getValue());
-            book.setCreationTime(LocalDate.now());
+            book.setCreationTime(LocalDateTime.now());
             FileData savedFileData = fileBuffer.getFileData();
             UUID uuid = UUID.randomUUID();
             book.setImage(uuid.toString());
@@ -80,7 +84,7 @@ public class CreateBookPage extends VerticalLayout {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            UI.getCurrent().navigate("/index");
+            UI.getCurrent().navigate("");
         });
     }
 }

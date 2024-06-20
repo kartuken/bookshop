@@ -19,17 +19,25 @@ import com.vaadin.flow.server.StreamResource;
 import com.vaadin.flow.server.VaadinService;
 import org.apache.catalina.webresources.FileResource;
 import org.krytev.bookstore.domain.BookEntity;
+import org.krytev.bookstore.services.LikeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 
 @Tag("div")
 @CssImport("./styles/book-card.css")
 public class BookCard extends VerticalLayout {
 
+    private  LikeService likeService;
     private final BookEntity book;
-    public BookCard(BookEntity book){
+
+    public BookCard(BookEntity book, LikeService likeService){
         this.book = book;
+        this.likeService = likeService;
         this.addClassName("bookcard-card");
         this.getElement().setProperty("display", "inline-block");
         this.setWidth("");
@@ -41,8 +49,14 @@ public class BookCard extends VerticalLayout {
         Div result = new Div();
         result.addClassName("bookcard-image-container");
 
-        StreamResource imageResource = new StreamResource(book.getImage(),
-                () -> getClass().getResourceAsStream("/static/images/" + book.getImage() + ".png"));
+        StreamResource imageResource = new StreamResource(book.getImage() + ".png",
+                () -> {
+                    try {
+                        return new FileInputStream("src/main/resources/static/images/" + book.getImage() + ".png");
+                    } catch (FileNotFoundException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
         Component image = new Image(imageResource, "404\nNo image");
         image.addClassName("bookcard-image");
 
@@ -74,8 +88,13 @@ public class BookCard extends VerticalLayout {
         heartIcon.addClassName("heart");
         heartIcon.setSize("15px");
 
-        Component likeCount = new Span(String.valueOf(book.getLikes().size()));
+        Component likeCount = new Span(String.valueOf(likeService.getLikeCount(book)));
         likes.add(heartIcon, likeCount);
+        likes.addClickListener(event -> {
+            likeService.like(SecurityContextHolder.getContext().getAuthentication(), book);
+            likeCount.getElement().setText(String.valueOf(likeService.getLikeCount(book)));
+
+        });
 
         Div price = new Div();
         price.addClassName("bookcard-price");
@@ -85,5 +104,4 @@ public class BookCard extends VerticalLayout {
         result.add(likes, price);
         return result;
     }
-
 }

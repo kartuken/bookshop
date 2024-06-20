@@ -48,6 +48,7 @@ public class BookService{
     }
 
     public List<BookEntity> findMostLiked(){
+        System.out.println(bookRepository.findMostLiked(PageRequest.ofSize(15)));
        return bookRepository.findMostLiked(PageRequest.ofSize(15));
     }
 

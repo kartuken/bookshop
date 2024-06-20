@@ -10,6 +10,8 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
+import org.krytev.bookstore.components.NavigationBar;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 @Route("login")
 @PageTitle("Login")
@@ -17,18 +19,19 @@ import com.vaadin.flow.component.button.Button;
 public class LoginPage extends VerticalLayout implements BeforeEnterObserver {
 
     private LoginForm login = new LoginForm();
-    private Button registration = new Button("registration");
     public LoginPage() {
         addClassName("login-view");
         setSizeFull();
 
-        setJustifyContentMode(JustifyContentMode.CENTER);
-        setAlignItems(Alignment.CENTER);
+        VerticalLayout content = new VerticalLayout();
+
+        content.setAlignItems(Alignment.CENTER);
+        content.getStyle().setMarginTop("40px");
+        content.add(login);
 
         login.setAction("login");
         login.addLoginListener(buttonClickEvent -> UI.getCurrent().navigate(""));
-        registration.addClickListener(buttonClickEvent -> UI.getCurrent().navigate("/registration"));
-        add(new H1("Test Application"), login, registration);
+        add(new NavigationBar(SecurityContextHolder.getContext().getAuthentication()), content);
 
     }
 

@@ -9,6 +9,8 @@ import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.server.VaadinService;
+import com.vaadin.flow.server.VaadinSession;
 import org.krytev.bookstore.domain.CommentEntity;
 import org.krytev.bookstore.domain.RoleEntity;
 import org.krytev.bookstore.domain.UserEntity;
@@ -49,9 +51,18 @@ public class NavigationBar extends VerticalLayout {
         botContainer.addClassName("navigationbar-botcontainer");
         botContainer.add(
                 getNavigationComponent("Main", ""),
-                getNavigationComponent("Catalog", ""),
-                getNavigationComponent("Filials", "")
+                getNavigationComponent("Catalog", "catalog"),
+                getNavigationComponent("Filials", "filials")
         );
+
+        if (roles.contains(new SimpleGrantedAuthority("ROLE_ADMIN"))){
+            botContainer.add(
+                    getNavigationComponent("Add Book", "create-book"),
+                    getNavigationComponent("Add Genre", "create-genre"),
+                    getNavigationComponent("Add Filial", "create-filial"),
+                    getNavigationComponent("Watch orders", "view-orders")
+            );
+        }
 
         add(
                 topContainer,
@@ -84,18 +95,40 @@ public class NavigationBar extends VerticalLayout {
 
         Button signIn = new Button("Sign In");
         signIn.addClassName("navigationbar-sign-in-button");
-        signIn.addClickListener(event -> {UI.getCurrent().navigate("login");});
+        signIn.addClickListener(event -> UI.getCurrent().navigate("login"));
 
         Button signUp = new Button("Sign Up");
         signUp.addClassName("navigationbar-sign-up-button");
-        signUp.addClickListener(event -> {UI.getCurrent().navigate("registration");});
+        signUp.addClickListener(event -> UI.getCurrent().navigate("registration"));
 
         result.add(signIn, signUp);
         return result;
     }
 
     private Component getLogedIcons(UserEntity user){
-        return new Div();
+
+        Div result = new Div();
+        result.addClassName("navigationbar-log-buttons-container");
+        result.setWidth("");
+
+        Button liked = new Button("Liked");
+        liked.addClassName("navigationbar-sign-up-button");
+        liked.addClickListener(event -> UI.getCurrent().navigate("liked"));
+
+        Button cart = new Button("Cart");
+        cart.addClassName("navigationbar-sign-up-button");
+        cart.addClickListener(event -> UI.getCurrent().navigate("cart"));
+
+        Button orders = new Button("Orders");
+        orders.addClassName("navigationbar-sign-up-button");
+        orders.addClickListener(event -> UI.getCurrent().navigate("orders"));
+
+        Button logout = new Button("Logout");
+        logout.addClassName("navigationbar-sign-up-button");
+        logout.addClickListener(event -> VaadinSession.getCurrent().getSession().invalidate());
+
+        result.add(liked, cart, orders, logout);
+        return result;
     }
 
 }
