@@ -11,7 +11,7 @@ import org.krytev.bookstore.services.LikeService;
 import java.util.List;
 
 @Tag("div")
-@CssImport("./styles/book-map.css")
+@CssImport("./styles/components/book-map.css")
 public class BookMap extends HorizontalLayout {
     private LikeService likeService;
     public BookMap(List<BookEntity> books, LikeService likeService){

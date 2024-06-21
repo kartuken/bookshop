@@ -28,8 +28,9 @@ public class UserEntity implements UserDetails {
 
     private String address;
 
-    @OneToOne
-    private CartEntity cartEntity;
+    @OneToMany
+    private List<PositionEntity> positions;
+
     @OneToMany
     private List <CommentEntity> comments;
 

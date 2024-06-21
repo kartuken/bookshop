@@ -13,7 +13,6 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class FilialService {
-    @Autowired
     private final FilialRepository filialRepository;
 
     public List<FilialEntity> findByCity(CityEntity cityEntity){

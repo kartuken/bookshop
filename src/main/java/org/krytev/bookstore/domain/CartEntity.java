@@ -17,6 +17,6 @@ public class CartEntity {
     @OneToOne
     private UserEntity user;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<PositionEntity> positions;
 }

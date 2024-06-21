@@ -20,4 +20,7 @@ public class PositionEntity {
     @ManyToOne
     private OrderEntity order;
 
+    @ManyToOne
+    private UserEntity user;
+
 }

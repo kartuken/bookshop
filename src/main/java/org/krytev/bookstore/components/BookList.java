@@ -11,7 +11,7 @@ import org.krytev.bookstore.services.LikeService;
 import java.util.List;
 
 @Tag("div")
-@CssImport("./styles/book-list.css")
+@CssImport("./styles/components/book-list.css")
 public class BookList extends HorizontalLayout {
     private LikeService likeService;
 

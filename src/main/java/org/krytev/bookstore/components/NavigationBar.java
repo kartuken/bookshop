@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Tag("div")
-@CssImport("./styles/navigation-bar.css")
+@CssImport("./styles/components/navigation-bar.css")
 public class NavigationBar extends VerticalLayout {
 
     List <GrantedAuthority> roles;
