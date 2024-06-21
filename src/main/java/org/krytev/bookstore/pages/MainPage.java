@@ -30,7 +30,6 @@ public class MainPage extends VerticalLayout {
         this.likeService = likeService;
 
 
-
         add(
                 new NavigationBar(SecurityContextHolder.getContext().getAuthentication()),
                 new BookList("Most Liked", bookService.findMostLiked(), likeService),
