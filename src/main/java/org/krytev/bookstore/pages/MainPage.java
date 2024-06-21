@@ -28,9 +28,6 @@ public class MainPage extends VerticalLayout {
         this.bookService = bookService;
         this.genreService = genreService;
         this.likeService = likeService;
-        System.out.println("test start");
-        System.out.println(bookService.findMostLiked());
-        System.out.println("test end");
         add(
                 new NavigationBar(SecurityContextHolder.getContext().getAuthentication()),
                 new BookList("Most Liked", bookService.findMostLiked(), likeService),

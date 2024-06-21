@@ -34,10 +34,6 @@ public class IndexBookPage extends VerticalLayout {
     @Autowired
     public IndexBookPage(BookService bookService, SecurityContextHolder securityContextHolder, GenreService genreService) {
         this.bookService = bookService;
-        System.out.println("testing start");
-        System.out.println(bookService.findByTitle("asd"));
-        System.out.println(bookService.findByTitleAndGenre("asd", genreService.findByName("Fantastic").get()));
-        System.out.println("testing end");
         add(grid);
         grid.setItems(bookService.findAll());
         grid.setColumns("title", "author", "year", "price");
