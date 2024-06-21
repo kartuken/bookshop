@@ -1,18 +1,24 @@
 import { injectGlobalCss } from 'Frontend/generated/jar-resources/theme-util.js';
 
 import { css, unsafeCSS, registerStyles } from '@vaadin/vaadin-themable-mixin';
-import $cssFromFile_0 from 'Frontend/styles/book-card.css?inline';
+import $cssFromFile_0 from 'Frontend/styles/components/book-card.css?inline';
 
 injectGlobalCss($cssFromFile_0.toString(), 'CSSImport end', document);
-import $cssFromFile_1 from 'Frontend/styles/book-list.css?inline';
+import $cssFromFile_1 from 'Frontend/styles/components/book-list.css?inline';
 
 injectGlobalCss($cssFromFile_1.toString(), 'CSSImport end', document);
-import $cssFromFile_2 from 'Frontend/styles/book-map.css?inline';
+import $cssFromFile_2 from 'Frontend/styles/components/book-map.css?inline';
 
 injectGlobalCss($cssFromFile_2.toString(), 'CSSImport end', document);
-import $cssFromFile_3 from 'Frontend/styles/navigation-bar.css?inline';
+import $cssFromFile_3 from 'Frontend/styles/components/navigation-bar.css?inline';
 
 injectGlobalCss($cssFromFile_3.toString(), 'CSSImport end', document);
+import $cssFromFile_4 from 'Frontend/styles/pages/book-page.css?inline';
+
+injectGlobalCss($cssFromFile_4.toString(), 'CSSImport end', document);
+import $cssFromFile_5 from 'Frontend/styles/pages/filials-page.css?inline';
+
+injectGlobalCss($cssFromFile_5.toString(), 'CSSImport end', document);
 import '@vaadin/common-frontend/ConnectionIndicator.js';
 import '@vaadin/polymer-legacy-adapter/style-modules.js';
 import '@vaadin/accordion/theme/lumo/vaadin-accordion.js';

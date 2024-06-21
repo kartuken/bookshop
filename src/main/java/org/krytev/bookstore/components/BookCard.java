@@ -1,9 +1,6 @@
 package org.krytev.bookstore.components;
 
-import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.Svg;
-import com.vaadin.flow.component.Tag;
-import com.vaadin.flow.component.Text;
+import com.vaadin.flow.component.*;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.html.Div;
@@ -29,7 +26,7 @@ import java.io.FileNotFoundException;
 
 
 @Tag("div")
-@CssImport("./styles/book-card.css")
+@CssImport("./styles/components/book-card.css")
 public class BookCard extends VerticalLayout {
 
     private  LikeService likeService;
@@ -43,6 +40,7 @@ public class BookCard extends VerticalLayout {
         this.setWidth("");
 
         this.add(getImageContainer(), getTitleContainer(), getAuthorContainer(), getRatingComponent());
+        this.addClickListener(event -> UI.getCurrent().navigate("books/" + book.getId()));
     }
 
     private Component getImageContainer(){

@@ -1,0 +1,35 @@
+
+.bookpage-image{
+    width: 450px;
+}
+
+.bookpage-title{
+    width: 600px;
+    font-weight: bold;
+    font-size: 25px;
+    display: inline-block;
+}
+
+.bookpage-author{
+    width: 600px;
+    display: inline-block;
+}
+
+.bookpage-titlebar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bookpage-button{
+    width: 140px;
+    margin-left: 10px;
+    display: inline-block;
+}
+
+.bookpage-buttons{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 300px;
+}
